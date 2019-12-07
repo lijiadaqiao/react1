@@ -7,7 +7,7 @@ import {mainRouter}from './routes'
 render(
   <Router>
     <Switch>
-      <Route path="/admin" rander={(routerProps)=>{
+      <Route path="/admin" render={(routerProps)=>{
         //余姚登录才能访问
         return <App {...routerProps}/>
       }}/>
