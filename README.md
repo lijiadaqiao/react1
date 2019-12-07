@@ -1,68 +1,105 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+基于react-app-rewired customize-cra 的定制化配置
+## 1.yarn add react-app-rewired customize-cra
+## 2.然后在项目根目录创建一个 config-overrides.js 用于修改默认配置。
+ const {override}=require('customize-cra')
+ module.exports = function override()
+## 3.package.json
+ "scripts": {
+-   "start": "react-scripts start",
++   "start": "react-app-rewired start",
+-   "build": "react-scripts build",
++   "build": "react-app-rewired build",
+-   "test": "react-scripts test",
++   "test": "react-app-rewired test",
+}
+## 4.yarn add less less-loader  配置less
+//config-overrides.js
+const {override,addLessLoader}=require('customize-cra')
+     module.exports=override(
+    addLessLoader({
+     javascriptEnabled: true
+      })
+     )
 
-In the project directory, you can run:
 
-### `yarn start`
+## 5. yarn add antd babel-plugin-import   使用antd 并启动高级配置
+//config-overrides.js
+ const {
+  override,
+  addLessLoader,
+ fixBabelImports
+} = require('customize-cra')
+module.exports = override(
+  fixBabelImports('import', {
+    libraryName: 'antd',
+    libraryDirectory: 'es',
+    style: true,
+  }),
+  addLessLoader({
+    javascriptEnabled: true
+  })
+)  
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 6.modifyVars 配置自定义主题
+//config-overrides.js
+const theme =require('./theme.js')
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+const {
+  override,
+  addLessLoader,
+  fixBabelImports
+} = require('customize-cra')
+module.exports = override(
+  fixBabelImports('import', {
+    libraryName: 'antd',
+    libraryDirectory: 'es',
+    style: true,
+  }),
+  addLessLoader({
+    javascriptEnabled: true,
+    modifyVars: theme
+  })
+)   
+//theme.js
+module.exports = {
+ '@primary-color': '#1890ff', // 全局主色
+'@link-color': '#1890ff', // 链接色
+'@success-color': '#52c41a', // 成功色
+'@warning-color': '#faad14', // 警告色
+'@error-color': '#f5222d', // 错误色
+'@font-size-base': '14px', // 主字号
+'@heading-color':'rgba(0, 0, 0, 0.85)',// 标题色
+'@text-color': 'rgba(0, 0, 0, 0.65)', // 主文本色
+'@text-color-secondary' : 'rgba(0, 0, 0, .45)', // 次文本色
+'@disabled-color ': 'rgba(0, 0, 0, .25)', // 失效色
+'@border-radius-base': '4px', // 组件/浮层圆角
+'@border-color-base':' #d9d9d9', // 边框色
+'@box-shadow-base':' 0 2px 8px rgba(0, 0, 0, 0.15)', // 浮层阴影
+}
 
-### `yarn test`
+## 7.配置装饰符，装饰高阶组件
+const theme =require('./theme.js')
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+const {
+  override,
+  addLessLoader,
+  fixBabelImports,
+  addDecoratorsLegacy
+} = require('customize-cra')
+module.exports = override(
+  fixBabelImports('import', {
+    libraryName: 'antd',
+    libraryDirectory: 'es',
+    style: true,
+  }),
+  addDecoratorsLegacy( ),
+  addLessLoader({
+    javascriptEnabled: true,
+    modifyVars: theme
+  })
+)  
 
-### `yarn build`
+##  7.1 yarn add -D @babel/plugin-proposal-decorators
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## 国际化配置：https://ant.design/docs/react/i18n-cn
