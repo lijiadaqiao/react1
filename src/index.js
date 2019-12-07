@@ -3,7 +3,7 @@ import {render} from 'react-dom'
 import {HashRouter as Router,Route,Switch,Redirect}from 'react-router-dom'
 import App from './App'
 import {mainRouter}from './routes'
-// import './index.less'
+import './index.less'
 render(
   <Router>
     <Switch>
