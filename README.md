@@ -103,3 +103,17 @@ module.exports = override(
 ##  7.1 yarn add -D @babel/plugin-proposal-decorators
 
 ## 国际化配置：https://ant.design/docs/react/i18n-cn
+
+
+
+## 8 路由 yarn add react-router-dom 
+## 8.1 路由懒加载 yarn add react-loadable
+ https://www.npmjs.com/package/react-loadable
+
+ import Loadable from 'react-loadable';
+import Loading from './my-loading-component';
+ 
+const LoadableComponent = Loadable({
+  loader: () => import('./my-component'),
+  loading: Loading,
+});
