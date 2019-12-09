@@ -15,16 +15,49 @@ service.interceptors.request.use((config)=>{
 
 service.interceptors.response.use((resp)=>{
   if (resp.data.code===200) {
+   
     return resp.data.data
   }else{
     //处理全局错区
     message.error(resp.data.errMsg)
   }
 })
-
+//获取文章列表
 export const  getArticles=(offset=0,limited=10)=>{
   return service.post('/api/v1/articlelist',{
     offset,
     limited
   })
+}
+
+//通过id删除文章
+export const deleteArticles=(id)=>{
+  return service.post(`/api/v1/articleDelete`,{
+    id
+  })
+}
+
+//通过id获取文章
+export const getArticleByID=(id)=>{
+  return service.post(`/api/v1/articleid`,{
+    id
+  })
+}
+
+//保存文章
+export const saveArticle=(id,data)=>{
+  return service.post(`/api/v1/articleid/${id}`,data)
+}
+//获取文章阅读量
+
+export const getArticleMount=()=>{
+  return service.post(`/api/v1/articleAmount`)
+  
+}
+
+
+//获取通知列表
+export const getNotifications=()=>{
+  return service.post(`/api/v1/notifications`)
+  
 }

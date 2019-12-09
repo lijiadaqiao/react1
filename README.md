@@ -117,13 +117,140 @@ const LoadableComponent = Loadable({
   loader: () => import('./my-component'),
   loading: Loading,
 });
+//LoadableComponent：暴露模块的名字  
+./my-component：要导出模块的路径
+loader： Loading 未加载完成时显示的自己做的Loading模块
 
 
 
-##  接口文档
+##  接口文档 mock数据
 http://rap2.taobao.org/repository/editor?id=239183
 
+## 判断开发者模式
+isDev=process.env.NODE_ENV==="development"
+
+## yarn add moment
+ moment(createAt).format("YYYY年MM月DD日 HH:mm:ss:")
+ moment(createAt).valueOf() 转成时间戳
+
+
+## xlsx 前端导出excel
+npm install xlsx
+
+
+## processon 画图工具
+
+
+## bool = document.execCommand(aCommandName, aShowDefaultUI, aValueArgument) 富文本
+https://developer.mozilla.org/zh-CN/docs/Web/API/Document/execCommand
+
+# 老版本var mode = document.designMode;
+document.designMode = "on" || "off";
+
+https://developer.mozilla.org/zh-CN/docs/Web/API/Document/designMode
+
+别人写好的：  ueditor.baidu.com kindeditor 
+wangeditor.com editor.md 后两个推荐
+
+# createRef ref上面不是真正的DOM
+createRef().current 获取真正的DOM
+
+
+eg:wangeditor 
+initEditor=()=>{
+    this.editor = new E(this.editorRef.current)
+    this.editor.customConfig.onchange = (html) => {
+      // html 即变化之后的内容     
+      this.props.form.setFieldsValue({
+        content: html,
+      });
+  }
 
 
 
-yarn add moment
+# 处理后端传来的数据
+ data.createAt=moment(data.createAt)
+ this.props.form.setFieldsValue(data)
+this.editor.txt.html(data.content)    editor的内容处理方式
+
+
+# Object.assign
+const data =Object.assign({},values,{
+          createAt:values.createAt.valueOf()
+        })
+
+const returnedTarget = Object.assign(target, source)
+target 目标对象。sources 源对象。
+
+# Object.keys(obj)
+
+var obj = { 0: 'a', 1: 'b', 2: 'c' };
+console.log(Object.keys(obj)); // console: ['0', '1', '2']
+
+# Object.is() 方法判断两个值是否是相同的值。
+Object.is(value1, value2);
+
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/prototype
+
+
+# 使用antd  
+  Card, > extra 
+  Button,
+  Form,   >labelCol wrapperCol 栅格  
+    Form.Item > getFieldDecorator  wrapperCol={{span:12,offset:4}}
+  Input,
+  DatePicker ,
+  Spin, >spinning 页面loading
+  message  全局提示
+  Tag,
+  Typography, 排版，里面可放多个span div
+  Modal,  >visible onCancel confirmLoading onOk
+  Tooltip 经过提示
+  Dropdown 下拉菜单
+  Badge 小红点
+  Dropdown 下拉菜单    style={{display:'flex' ,alignItems:'center'}}
+
+
+
+  # table render Function(text, record, index) {}
+
+
+
+  #  颜色大全
+  https://www.materialui.co/colors
+
+
+  # 网页图标技术
+  1. canvas 
+  2.svg 矢量
+  3. 三维 webgl
+
+  开源库 图标
+  echarts 免费 人最多  yarn add echart
+  https://www.echartsjs.com/examples/zh/index.html
+  higcharts
+
+  专业开发 图表，数据可视化
+  d3
+  DataV 阿里的
+  egret 做游戏，百度出品
+  antv 蚂蚁 G2 G6 F2 L7 很火
+  rapheal.js 支持更老的版本
+
+
+#  react 中操作DOM需要引入createRef 并且在 constructor()
+{
+    super()
+    this.articleAmount=createRef()
+  }
+
+
+#  redux 
+yarn add redux react-redux redux-thunk
+
+
+# list.every
+disabled={this.props.list.every(item=>item.hasRead!==true)
+
+# 获取未读数据的数量
+notificationsCount:state.notifications.list.filter(item=>item.hasRead===false).length
