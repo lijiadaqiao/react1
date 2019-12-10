@@ -153,6 +153,7 @@ export default class ArticleList extends Component {
     .then(resp=>{
       const columnkeys=Object.keys(resp.list[0])
       const columns=this.createColumns(columnkeys)
+      if(!this.updater.isMounted(this)) return
       this.setState({
         total:resp.total,
         columns,
@@ -164,6 +165,7 @@ export default class ArticleList extends Component {
 
     })
     .finally(()=>{
+      if(!this.updater.isMounted(this)) return
       this.setState({
         isLoing:false
       })
@@ -202,8 +204,14 @@ export default class ArticleList extends Component {
     XLSX.writeFile(wb, `sheetjs-${this.state.offset/this.state.limited+1}
      ${moment().format('YYYY-MM-DD HH-mm-ss')}.xlsx`)
   }
+
+
   componentDidMount(){
+    
     this.getData()
+  }
+  componentWillUnmount(){
+   
   }
   render() {
     

@@ -40,6 +40,14 @@ const Notifications=Loadable({
   loader:()=>import ('./Notifications'),
   loading:Loading
 })
+const NoAuth=Loadable({
+  loader:()=>import ('./NoAuth/index'),
+  loading:Loading
+})
+const Profile=Loadable({
+  loader:()=>import ('./Profile/index'),
+  loading:Loading
+})
 export {
   Dashboard,
   Login,
@@ -47,5 +55,7 @@ export {
   Settings,
   ArticleList,
   ArticleEdit,
-  Notifications
+  Notifications,
+  NoAuth,
+  Profile
 }

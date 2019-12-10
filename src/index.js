@@ -15,7 +15,7 @@ render(
         <Switch>
           <Route path="/admin" render={(routerProps) => {
             //余姚登录才能访问
-            return <App {...routerProps} />
+            return  <App {...routerProps} />
           }} />
           {mainRouter.map(route => {
             return <Route key={route.pathname} path={route.pathname} component={route.component}></Route>

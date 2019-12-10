@@ -5,6 +5,10 @@ const service=axios.create({
   baseURL:isDev?'http://rap2api.taobao.org/app/mock/239183':''
 })
 
+const service1=axios.create({
+  baseURL:isDev?'http://rap2api.taobao.org/app/mock/239183':''
+})
+
 service.interceptors.request.use((config)=>{
   config.data=Object.assign({},config.data,{
     //authToken:window.localStorage.getItem('authToken')
@@ -59,5 +63,13 @@ export const getArticleMount=()=>{
 //获取通知列表
 export const getNotifications=()=>{
   return service.post(`/api/v1/notifications`)
+  
+}
+
+
+//登录接口
+
+export const loginRequest=(userInfo)=>{
+  return service1.post(`/api/v1/login`,userInfo)
   
 }

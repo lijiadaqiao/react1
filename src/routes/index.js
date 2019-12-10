@@ -5,7 +5,9 @@ import {
   Settings,
   ArticleList,
   ArticleEdit,
-  Notifications
+  Notifications,
+  NoAuth,
+  Profile
 }from '../views'
 
 export const mainRouter=[{
@@ -25,7 +27,8 @@ export const adminRouter=[
     component:Dashboard,
     title:'仪表盘',
     isNav:true,
-    icon:'dashboard'
+    icon:'dashboard',
+    roles:['001','002','003']
   },
   
   {
@@ -34,24 +37,35 @@ export const adminRouter=[
     exact:true,
     title:'文章管理',
     isNav:true,
-    icon:'ordered-list'
+    icon:'ordered-list',
+    roles:['001','002']
   },
   {
     pathname:'/admin/article/edit/:id',
     component:ArticleEdit,
-   
+    roles:['001','002']
   },
   {
     pathname:'/admin/notifications',
     component:Notifications,
-   
+    roles:['001','002','003']
   },
-  
+  {
+    pathname:'/admin/noauth',
+    component:NoAuth,
+    roles:['001','002','003']
+  },
+  {
+    pathname:'/admin/profile',
+    component:Profile,
+    roles:['001','002','003']
+  },
   {
     pathname:'/admin/settings',
     component:Settings,
     title:'设置',
     isNav:true,
-    icon:'edit'
+    icon:'edit',
+    roles:['001']
   },
 ]

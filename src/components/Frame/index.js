@@ -3,6 +3,7 @@ import { Layout, Menu,  Icon, Dropdown ,Avatar,Badge} from 'antd'
 import {withRouter} from 'react-router-dom'
 import {connect}from 'react-redux'
 import {getNotificationlist}from '../../actions/notifications'
+import{logout}from '../../actions/user'
 import logo from './logo.jpg'
 import './frame.less'
 const { Header, Content,  Sider } = Layout
@@ -10,11 +11,13 @@ const { Header, Content,  Sider } = Layout
 
 const mapState=state=>{
   return {
-    notificationsCount:state.notifications.list.filter(item=>item.hasRead===false).length
+    notificationsCount:state.notifications.list.filter(item=>item.hasRead===false).length,
+    avatar:state.user.avatar,
+    displayName:state.user.displayName
   }
 }
 
-@connect(mapState,{getNotificationlist})
+@connect(mapState,{getNotificationlist,logout})
 @withRouter
 class Frame extends Component {
   componentDidMount(){
@@ -25,7 +28,12 @@ class Frame extends Component {
     this.props.history.push(key)
   }
   onDropdownMenuClick=({key})=>{
-    this.props.history.push(key)
+    if(key==='/login'){
+      this.props.logout()
+    }else{
+      this.props.history.push(key)
+    }
+   
   }
    renderDropdown=() => (
     <Menu onClick={this.onDropdownMenuClick}>
@@ -37,7 +45,7 @@ class Frame extends Component {
       </Badge>
         
       </Menu.Item>
-      <Menu.Item key="/admin/settings">
+      <Menu.Item key="/admin/profile">
        
           个人设置
        
@@ -66,8 +74,8 @@ class Frame extends Component {
      <Dropdown overlay={this.renderDropdown()} trigger={['click']}>
      
     <div style={{display:'flex' ,alignItems:'center'}} >
-      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-      欢迎您 
+      <Avatar src={this.props.avatar} />
+      欢迎您 !{this.props.displayName}
       <Badge count={this.props.notificationsCount} offset={[-10,-10]}>
       <Icon type="down" /> </Badge>
     </div>

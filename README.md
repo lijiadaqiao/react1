@@ -254,3 +254,33 @@ disabled={this.props.list.every(item=>item.hasRead!==true)
 
 # 获取未读数据的数量
 notificationsCount:state.notifications.list.filter(item=>item.hasRead===false).length
+
+# css样式技巧
+显示在底层：
+position: relative;
+z-index: 0; 
+
+3d 动画有硬件加速效果
+transform:translate3d(-50%,-40%,0);
+
+
+
+
+window.localStorage.setItem('authToken',resp.data.data.authToken)
+ window.sessionStorage.setItem('authToken',resp.data.data.authToken)
+   window.localStorage.removeItem('authToken')
+
+#  终止ajax请求
+如果组件销毁，者不再渲染state
+判断ajax 请求是否响应 this.updater.isMounted(this)
+  .then(resp=>{
+if(!this.updater.isMounted(this)) return
+
+ .finally(()=>{
+      if(!this.updater.isMounted(this)) return
+
+#  不使用HashRouter 需要配饰
+location / {
+  try_files $uri $uri/ /index.html;
+}
+https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
