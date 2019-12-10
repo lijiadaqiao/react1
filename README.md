@@ -209,6 +209,7 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
   Dropdown 下拉菜单
   Badge 小红点
   Dropdown 下拉菜单    style={{display:'flex' ,alignItems:'center'}}
+  Upload :点击上传
 
 
 
@@ -263,6 +264,8 @@ z-index: 0;
 3d 动画有硬件加速效果
 transform:translate3d(-50%,-40%,0);
 
+dashed 虚线框
+
 
 
 
@@ -284,3 +287,28 @@ location / {
   try_files $uri $uri/ /index.html;
 }
 https://router.vuejs.org/zh/guide/essentials/history-mode.html#%E5%90%8E%E7%AB%AF%E9%85%8D%E7%BD%AE%E4%BE%8B%E5%AD%90
+
+
+# 图床
+tietuku
+
+
+# 赋值与引用
+var newstate=state
+这是引用，在内存指向同一个值，一个变，另一个也变
+var newstate=Objict.assign({},state)
+map 
+{...state}
+只做了浅拷贝，第二层以后的没有拷贝，还指向原来的内存
+赋值，新开内存，第一层结构不随之变化，操作第二层却会都改变
+
+深拷贝要递归 ，即全拷贝   有复杂度，性能有问题
+插import {cloneDeep}from 'lodashjs '
+const newSate=cloneDeep(sate)
+https://www.lodashjs.com/
+
+
+或const newSate=JSON.parse(JSON.stringify(sate))//不能拷贝方法
+
+# immutable     持久化数据结构 一旦创建不能修改，使用数据会创建新数据保证旧数据不变，且使用结构共享，一个节点发生变化，只修改这个节点，和他受影响的父节点，其他节点共享
+
